@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Pacientes{% endblock title %}
+
+{% block content %}
+
+
+<div class="contenedor">
+    <div class="tabla-centro">
+        {% if lista_paciente %}
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Apellido</th>
+                    <th scope="col">Fecha Nacimiento</th>
+                    <th scope="col">Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for paciente in lista_paciente %}
+                <tr>
+                    <th scope="row">{{ paciente.id_paciente }}</th>
+                    <td>{{ paciente.nombre }}</td>
+                    <td>{{ paciente.apellido }}</td>
+                    <td>{{ paciente.fecha_nacimiento }}</td>
+                    <td>
+                        <a href="{% url 'paciente:borrar' paciente.id_paciente %}"><img
+                                src="{% static 'bootstrap/icons/trash.svg' %}" alt="trash" width="24" height="24"></a>
+                        <a href="#"><img src="{% static 'bootstrap/icons/pencil-square.svg' %}" alt="pencil-square"
+                                width="24" height="24"></a>
+                        <a href="#"><img src="{% static 'bootstrap/icons/info-circle.svg' %}" alt="info-circle"
+                                width="24" height="24"></a>
+                    </td>
+                </tr>
+                {% endfor %}
+
+            </tbody>
+        </table>
+        {% else %}
+        <h3>No hay pacientes registrados</h3>
+        {% endif %}
+    </div>
+</div>
+{% endblock content %}

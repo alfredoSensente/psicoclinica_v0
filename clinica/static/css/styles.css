@@ -1,0 +1,18 @@
+.tabla-centro {
+  display: grid;
+  grid-template-columns: 1000px;
+  grid-template-rows: auto;
+}
+
+.contenedor {
+  display: grid;
+  justify-content: center;
+  align-content: center;
+  width: auto;
+  height: auto;
+  margin: 40px;
+} 
+
+.letra-roja{
+  color: red;
+}

@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Confirmar borrado{% endblock title %}
+
+{% block content %}
+    <form action="{% url 'paciente:nuevo' %}" method="post">
+        {{ form.as_p }}
+        <button type="submit">Guardar</button>
+    </form>
+{% endblock content %}
+    

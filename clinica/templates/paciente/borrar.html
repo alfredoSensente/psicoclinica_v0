@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Confirmar borrado{% endblock title %}
+
+{% block content %}
+<div class="contenedor">
+
+    {% if paciente_borrar %}
+    <h1>Confirmar eliminación</h1>
+    <h3>Estas a punto de eliminar al usuario:</h3>
+    <ul>
+        <li>N° Registro: {{ paciente_borrar.id_paciente }} </li>
+        <li>Nombre: {{ paciente_borrar.nombre }} {{ paciente_borrar.apellido }}</li>
+    </ul>
+    <p>
+        Los cambios al realizar esta acción serán irreversibles. Al borrar a este paciente,
+        eliminarás todos los registros relacionados a él, como sus familiares y su expediente clinico.
+    </p>
+    <h3>¿Quieres eliminar este usuario?</h3>
+
+    <form method="POST" class="row">
+        {% csrf_token %}
+        <div class="col-auto">
+            <button class="btn btn-danger" type="submit" value="Confirm">Sí, elimnar</button>
+        </div>
+        <div class="col-auto">
+            <a class="btn btn-primary" href="{% url 'paciente:index' %}">Cancelar</a>
+        </div>
+    </form>
+    {% else %}
+    <h1>Paciente borrado exitosamente!</h1>
+    {% endif %}
+
+
+</div>
+{% endblock content %}

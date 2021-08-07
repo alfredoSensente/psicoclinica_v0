@@ -1,3 +1,5 @@
+"""Models Paciente"""
+#Django
 from django.db import models
 
 # Create your models here.
@@ -58,7 +60,7 @@ class Departamento(models.Model):
     def __str__(self):
         return self.departamento
 
-    class meta:
+    class Meta:
         db_table = 'departamento'
 
 
@@ -75,7 +77,7 @@ class Municipio(models.Model):
     def __str__(self):
         return self.municipio
 
-    class meta:
+    class Meta:
         db_table = 'municipio'
 
 
@@ -126,7 +128,7 @@ class Direccion(models.Model):
     def __str__(self):
         return self.direccion
 
-    class meta:
+    class Meta:
         db_table = 'direccion'
 
 
@@ -213,7 +215,7 @@ class Tratamiento(models.Model):
     def __str__(self):
         return f'Motivo: {self.motivo}'
 
-    class meta:
+    class Meta:
         db_table = 'tratamiento'
 
 
@@ -225,7 +227,7 @@ class Medicamento(models.Model):
     def __str__(self):
         return self.medicamento
 
-    class meta:
+    class Meta:
         db_table = 'medicamento'
 
 
@@ -247,5 +249,5 @@ class Padecimiento(models.Model):
     def __str__(self):
         return self.padecimiento
 
-    class meta:
+    class Meta:
         db_table = 'padecimiento'

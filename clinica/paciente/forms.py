@@ -1,14 +1,11 @@
+"""Forms Paciente"""
 from django import forms
-from django.db.models.fields import DateField, TextField
-from django.forms import widgets
-from django.forms.widgets import Textarea, Widget
 from .models import Paciente
 
 class PacienteForm(forms.ModelForm):
     """Form definition for Paciente."""
 
     class Meta:
-        """Meta definition for Pacienteform."""
 
         model = Paciente
         fields = (

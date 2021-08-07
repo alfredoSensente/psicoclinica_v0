@@ -5,7 +5,7 @@
 {% block content %}
     <div class="contenedor">
         <h1>Editar paciente</h1>
-        <form action="{% url 'paciente:editar' pk %}" method="post">
+        <form method="post">
             {% csrf_token %}
             {{ form.as_p }}
             <div class="row">

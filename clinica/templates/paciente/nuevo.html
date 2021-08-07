@@ -3,9 +3,12 @@
 {% block title %}Confirmar borrado{% endblock title %}
 
 {% block content %}
-    <form action="{% url 'paciente:nuevo' %}" method="post">
-        {{ form.as_p }}
-        <button type="submit">Guardar</button>
-    </form>
+    <div class="contenedor">
+        <form action="{% url 'paciente:nuevo' %}" method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn btn-primary">Guardar</button>
+        </form>
+    </div>
 {% endblock content %}
     

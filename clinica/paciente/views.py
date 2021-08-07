@@ -30,6 +30,25 @@ def nuevo_paciente(request):
     else:
         return render(request, 'paciente/nuevo.html', context={'form': PacienteForm()})
 
+def editar_paciente(request,pk):
+    """
+    update a patient
+    """
+    paciente_editar = get_object_or_404(Paciente, pk = pk)
+    if request.method == 'POST':
+        form = PacienteForm(request.POST, instance = paciente_editar)
+        if form.is_valid():
+            form.save()
+            return redirect('paciente:index')
+    else:
+        form = PacienteForm(instance = paciente_editar)
+    context={
+        'form' : form,
+        'pk' : pk,
+    }
+    return render(request, 'paciente/editar.html', context)
+    
+        
 def borrar_paciente(request, pk):
     """
     Borrar a un paciente a traves de su pk

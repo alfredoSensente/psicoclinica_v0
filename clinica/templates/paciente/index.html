@@ -26,12 +26,15 @@
                     <td>{{ paciente.apellido }}</td>
                     <td>{{ paciente.fecha_nacimiento }}</td>
                     <td>
-                        <a href="{% url 'paciente:borrar' paciente.id_paciente %}"><img
-                                src="{% static 'bootstrap/icons/trash.svg' %}" alt="trash" width="24" height="24"></a>
-                        <a href="#"><img src="{% static 'bootstrap/icons/pencil-square.svg' %}" alt="pencil-square"
-                                width="24" height="24"></a>
-                        <a href="#"><img src="{% static 'bootstrap/icons/info-circle.svg' %}" alt="info-circle"
-                                width="24" height="24"></a>
+                        <a href="{% url 'paciente:borrar' paciente.id_paciente %}"><img 
+                            src="{% static 'bootstrap/icons/trash.svg' %}" alt="trash" width="24" height="24"
+                            ></a>
+                        <a href="{% url 'paciente:editar' paciente.id_paciente %}"><img 
+                            src="{% static 'bootstrap/icons/pencil-square.svg' %}" alt="pencil-square" width="24" height="24"
+                            ></a>
+                        <a href="#"><img 
+                            src="{% static 'bootstrap/icons/info-circle.svg' %}" alt="info-circle" width="24" height="24"
+                            ></a>
                     </td>
                 </tr>
                 {% endfor %}

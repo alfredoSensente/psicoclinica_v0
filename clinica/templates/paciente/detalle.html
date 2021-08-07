@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Detalle Paciente{% endblock title %}
+
+{% block content %}
+    <div class="contenedor">
+        <h1>Detalle paciente</h1>
+        <h2>{{ paciente.nombre }} {{ paciente.apellido }}</h2>
+        <p>Fecha de nacimiento: {{ paciente.fecha_nacimiento }}</p>
+        <p>Religion: {{ paciente.id_religion }}</p>
+        <p>Estado civil: {{ paciente.id_estado_civil }}</p>
+        <p>Sexo: {{ paciente.id_sexo }}</p>
+
+        <div class="row">
+            <div class="col-auto">
+                <a href="{% url 'paciente:index' %}" class="btn btn-primary">Atrás</a>
+            </div>
+            <div class="col-auto">
+                <a href="{% url 'paciente:editar' paciente.id_paciente %}" class="btn btn-primary">Editar</a>
+            </div>
+        </div>
+
+    </div>
+{% endblock content %}

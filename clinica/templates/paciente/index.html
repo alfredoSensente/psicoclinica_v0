@@ -32,7 +32,7 @@
                         <a href="{% url 'paciente:editar' paciente.id_paciente %}"><img 
                             src="{% static 'bootstrap/icons/pencil-square.svg' %}" alt="pencil-square" width="24" height="24"
                             ></a>
-                        <a href="#"><img 
+                        <a href="{% url 'paciente:detalle' paciente.id_paciente%}"><img 
                             src="{% static 'bootstrap/icons/info-circle.svg' %}" alt="info-circle" width="24" height="24"
                             ></a>
                     </td>

@@ -8,7 +8,14 @@
         <form method="post">
             {% csrf_token %}
             {{ form.as_p }}
-            <button type="submit" class="btn btn-primary">Guardar</button>
+            <div class="row">
+                <div class="col-auto">
+                    <a href="{% url 'paciente:index' %}" class="btn btn-danger">Cancelar</a>
+                </div>
+                <div class="col-auto">
+                    <button type="submit" class="btn btn-primary">Guardar</button>
+                </div>
+            </div>
         </form>
     </div>
 {% endblock content %}

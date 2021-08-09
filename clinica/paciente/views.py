@@ -13,10 +13,23 @@ from .models import Paciente
 
 def index(request):
     """Devuelve un listado de pacientes"""
-    lista_paciente = Paciente.objects.all()
+    if request.method == 'POST':
+        if request.POST['opcion-paciente'] == 'nombre':
+            lista_paciente = Paciente.objects.filter(
+                nombre__icontains=request.POST['busqueda-paciente']
+            )
+        elif request.POST['opcion-paciente'] == 'apellido':
+            lista_paciente = Paciente.objects.filter(
+                apellido__icontains=request.POST['busqueda-paciente']
+            )
+        elif request.POST['opcion-paciente'] == 'sexo':
+            lista_paciente = Paciente.objects.filter(
+                id_sexo__sexo__icontains=request.POST['busqueda-paciente']
+            )
+    else:
+        lista_paciente = Paciente.objects.all()
     context = {
         'lista_paciente': lista_paciente,
-        'active_paciente': 'active',
     }
     return render(request, 'paciente/index.html', context)
 

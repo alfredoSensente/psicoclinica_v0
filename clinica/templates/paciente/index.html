@@ -6,6 +6,28 @@
 
 
 <div class="contenedor">
+    <form class="row" method="POST">
+        {% csrf_token %}
+        <div class="col-auto">
+            <select class="form-select" name="opcion-paciente" id="opcion-paciente" aria-label="Default select example">
+                <option value="nombre" selected>Por nombre</option>
+                <option value="apellido">Por apellido</option>
+                <option value="sexo">Por sexo</option>
+            </select>
+        </div>
+        <div class="col-auto">
+            <input type="text" name="busqueda-paciente" id="busqueda-paciente" class="form-control">
+        </div>
+        <div class="col-auto">
+            <button type="submit" class="btn btn-primary">Buscar</button>
+        </div>
+        <div class="col">
+            <a class="btn btn-success float-end" href="{% url 'paciente:nuevo' %}">
+                <img src="{% static 'bootstrap/icons/plus-circle.svg' %}" alt="plus-cirlce">
+                Nuevo Paciente
+            </a>
+        </div>
+    </form>
     <div class="tabla-centro">
         {% if lista_paciente %}
         <table class="table table-hover">
@@ -26,15 +48,14 @@
                     <td>{{ paciente.apellido }}</td>
                     <td>{{ paciente.fecha_nacimiento }}</td>
                     <td>
-                        <a href="{% url 'paciente:borrar' paciente.id_paciente %}"><img 
-                            src="{% static 'bootstrap/icons/trash.svg' %}" alt="trash" width="24" height="24"
-                            ></a>
-                        <a href="{% url 'paciente:editar' paciente.id_paciente %}"><img 
-                            src="{% static 'bootstrap/icons/pencil-square.svg' %}" alt="pencil-square" width="24" height="24"
-                            ></a>
-                        <a href="{% url 'paciente:detalle' paciente.id_paciente%}"><img 
-                            src="{% static 'bootstrap/icons/info-circle.svg' %}" alt="info-circle" width="24" height="24"
-                            ></a>
+                        <a href="{% url 'paciente:borrar' paciente.id_paciente %}"><img
+                                src="{% static 'bootstrap/icons/trash.svg' %}" alt="trash" width="24" height="24"></a>
+                        <a href="{% url 'paciente:editar' paciente.id_paciente %}"><img
+                                src="{% static 'bootstrap/icons/pencil-square.svg' %}" alt="pencil-square" width="24"
+                                height="24"></a>
+                        <a href="{% url 'paciente:detalle' paciente.id_paciente%}"><img
+                                src="{% static 'bootstrap/icons/info-circle.svg' %}" alt="info-circle" width="24"
+                                height="24"></a>
                     </td>
                 </tr>
                 {% endfor %}
@@ -42,7 +63,9 @@
             </tbody>
         </table>
         {% else %}
-        <h3>No hay pacientes registrados</h3>
+        <br>
+        <h3>No se encontraron pacientes</h3>
+        <br>
         {% endif %}
     </div>
 </div>

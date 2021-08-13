@@ -16,18 +16,6 @@ class Sexo(models.Model):
         db_table = 'sexo'
 
 
-class Religion(models.Model):
-    """Religión"""
-    id_religion = models.AutoField(primary_key=True)
-    religion = models.CharField(max_length=45)
-
-    def __str__(self):
-        return self.religion
-
-    class Meta:
-        db_table = 'religion'
-
-
 class EstadoCivil(models.Model):
     """Estado Civil"""
     id_estado_civil = models.AutoField(primary_key=True)
@@ -40,16 +28,16 @@ class EstadoCivil(models.Model):
         db_table = 'estado_civil'
 
 
-class TipoFamiliar(models.Model):
-    """Tipo Familiar"""
-    id_tipo_familiar = models.AutoField(primary_key=True)
-    tipo_familiar = models.CharField(max_length=45)
+class TipoContacto(models.Model):
+    """Tipo Contacto"""
+    id_tipo_contacto = models.AutoField(primary_key=True)
+    tipo_contacto = models.CharField(max_length=45)
 
     def __str__(self):
-        return self.tipo_familiar
+        return self.tipo_contacto
 
     class Meta:
-        db_table = 'tipo_familiar'
+        db_table = 'tipo_contacto'
 
 
 class Departamento(models.Model):
@@ -81,33 +69,16 @@ class Municipio(models.Model):
         db_table = 'municipio'
 
 
-class Paciente(models.Model):
-    """paciente"""
-    id_paciente = models.AutoField(primary_key=True)
-    nombre = models.CharField(max_length=45)
-    apellido = models.CharField(max_length=45)
-    fecha_nacimiento = models.DateField()
-    id_religion = models.ForeignKey(
-        Religion,
-        on_delete=models.CASCADE,
-        db_column='id_religion'
-    )
-    id_estado_civil = models.ForeignKey(
-        EstadoCivil,
-        on_delete=models.CASCADE,
-        db_column='id_estado_civil'
-    )
-    id_sexo = models.ForeignKey(
-        Sexo,
-        on_delete=models.CASCADE,
-        db_column='id_sexo'
-    )
+class TipoReferencia(models.Model):
+    """Tipo Referencia"""
+    id_tipo_referencia = models.AutoField(primary_key=True)
+    tipo_referencia = models.CharField(max_length=45)
 
     def __str__(self):
-        return self.nombre + " " + self.apellido
+        return self.tipo_referencia
 
     class Meta:
-        db_table = 'paciente'
+        db_table = 'tipo_referencia'
 
 
 class Direccion(models.Model):
@@ -119,11 +90,6 @@ class Direccion(models.Model):
         on_delete=models.CASCADE,
         db_column='id_municipio'
     )
-    id_paciente = models.OneToOneField(
-        Paciente,
-        on_delete=models.CASCADE,
-        db_column='id_paciente'
-    )
 
     def __str__(self):
         return self.direccion
@@ -132,11 +98,44 @@ class Direccion(models.Model):
         db_table = 'direccion'
 
 
-class NumeroContacto(models.Model):
-    """Numero de Contacto"""
-    id_numeros_de_contacto = models.AutoField(primary_key=True)
-    numero_contacto = models.CharField(max_length=45)
-    nombre_contacto = models.CharField(max_length=45)
+class Paciente(models.Model):
+    """paciente"""
+    id_paciente = models.AutoField(primary_key=True)
+    nombre = models.CharField(max_length=45)
+    apellido = models.CharField(max_length=45)
+    fecha_nacimiento = models.DateField()
+    id_estado_civil = models.ForeignKey(
+        EstadoCivil,
+        on_delete=models.CASCADE,
+        db_column='id_estado_civil'
+    )
+    id_sexo = models.ForeignKey(
+        Sexo,
+        on_delete=models.CASCADE,
+        db_column='id_sexo'
+    )
+    id_direccion = models.OneToOneField(
+        Direccion,
+        on_delete=models.CASCADE,
+        db_column='id_direccion'
+    )
+
+    def __str__(self):
+        return self.nombre + " " + self.apellido
+
+    class Meta:
+        db_table = 'paciente'
+
+
+class Referencia(models.Model):
+    """Referencia"""
+    id_referencia = models.AutoField(primary_key=True)
+    nombre = models.CharField(max_length=45)
+    id_tipo_referencia = models.ForeignKey(
+        TipoReferencia,
+        on_delete=models.CASCADE,
+        db_column='id_tipo_referencia'
+    )
     id_paciente = models.ForeignKey(
         Paciente,
         on_delete=models.CASCADE,
@@ -144,31 +143,61 @@ class NumeroContacto(models.Model):
     )
 
     def __str__(self):
-        return self.numero_contacto
+        return self.nombre
 
     class Meta:
-        db_table = 'numero_contacto'
+        db_table = 'referencia'
 
 
-class Familiar(models.Model):
-    """Familiar"""
-    id_familiar = models.AutoField(primary_key=True)
+class TelefonoPaciente(models.Model):
+    """Telefono Paciente"""
+    id_telefono_paciente = models.AutoField(primary_key=True)
+    telefono_paciente = models.CharField(max_length=45)
+    id_paciente = models.ForeignKey(
+        Paciente,
+        on_delete=models.CASCADE,
+        db_column='id_paciente'
+    )
+
+    def __str__(self):
+        return self.telefono_paciente
+
+    class Meta:
+        db_table = 'telefono_paciente'
+
+
+class EmailPaciente(models.Model):
+    """Email Paciente"""
+    id_email_paciente = models.AutoField(primary_key=True)
+    email_paciente = models.CharField(max_length=45)
+    id_paciente = models.ForeignKey(
+        Paciente,
+        on_delete=models.CASCADE,
+        db_column='id_paciente'
+    )
+
+    def __str__(self):
+        return self.email_paciente
+
+    class Meta:
+        db_table = 'email_paciente'
+
+
+class Contacto(models.Model):
+    """Contacto"""
+    id_contacto = models.AutoField(primary_key=True)
     nombre = models.CharField(max_length=45)
     apellido = models.CharField(max_length=45)
-    fecha_nacimiento = models.DateField(blank=True, null=True)
-    trato = models.TextField(max_length=1000)
-    vives_con_el = models.BooleanField()
-    ocupacion = models.CharField(max_length=45, blank=True, null=True)
     responsable = models.BooleanField()
     id_paciente = models.ForeignKey(
         Paciente,
         on_delete = models.CASCADE,
         db_column = 'id_paciente'
     )
-    id_tipo_familiar = models.ForeignKey(
-        TipoFamiliar,
+    id_tipo_contacto = models.ForeignKey(
+        TipoContacto,
         on_delete = models.CASCADE,
-        db_column = 'id_tipo_familiar'
+        db_column = 'id_tipo_contacto'
     )
     id_sexo = models.ForeignKey(
         Sexo,
@@ -180,7 +209,24 @@ class Familiar(models.Model):
         return self.nombre+ " " + self.apellido
 
     class Meta:
-        db_table = 'familiar'
+        db_table = 'contacto'
+
+
+class TelefonoContacto(models.Model):
+    """Telefono de contacto"""
+    id_telefono_contacto = models.AutoField(primary_key=True)
+    telefono_contacto = models.CharField(max_length=45)
+    id_contacto = models.ForeignKey(
+        Contacto,
+        on_delete=models.CASCADE,
+        db_column='id_contacto'
+    )
+
+    def __str__(self):
+        return self.telefono_contacto
+
+    class Meta:
+        db_table = 'telefono_contacto'
 
 
 class ExpedienteClinico(models.Model):
@@ -203,9 +249,10 @@ class Tratamiento(models.Model):
     """Tratamiento"""
     id_tratamiento = models.AutoField(primary_key=True)
     motivo = models.CharField(max_length=45, null=False)
-    periodo = models.CharField(max_length=45, null=True)
+    fecha_inicio = models.DateField(null=False)
+    fecha_final = models.DateField(null=True)
     alta = models.BooleanField(default=False)
-    descripcion = models.TextField(max_length=255, null=True)
+    descripcion = models.TextField(null=True)
     id_expediente_clinico = models.ForeignKey(
         ExpedienteClinico,
         on_delete = models.CASCADE,
@@ -235,6 +282,7 @@ class Padecimiento(models.Model):
     """municipio"""
     id_padecimiento = models.AutoField(primary_key=True)
     padecimiento = models.CharField(max_length=45, null=False)
+    nombre_medico = models.CharField(max_length=45, null=False)
     id_medicamento = models.ForeignKey(
         Medicamento,
         on_delete=models.CASCADE,
@@ -251,3 +299,20 @@ class Padecimiento(models.Model):
 
     class Meta:
         db_table = 'padecimiento'
+
+
+class TelefonoMedico(models.Model):
+    """Telefono del medico que ha recetado medicamentos"""
+    id_telefono_medico = models.AutoField(primary_key=True)
+    telefono_medico = models.CharField(max_length=45)
+    id_padecimiento = models.ForeignKey(
+        Padecimiento,
+        on_delete=models.CASCADE,
+        db_column='id_padecimiento'
+    )
+
+    def __str__(self):
+        return self.telefono_medico
+
+    class Meta:
+        db_table = 'telefono_medico'

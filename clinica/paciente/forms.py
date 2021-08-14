@@ -17,10 +17,22 @@ class PacienteForm(forms.ModelForm):
             'id_direccion',
         )
         widgets = {
-            'nombre':forms.TextInput(attrs={'type':'text', 'class':'form-control'}),
-            'apellido':forms.TextInput(attrs={'type':'text', 'class':'form-control'}),
-            'fecha_nacimiento' : forms.TextInput(attrs={'type':'date', 'class':'form-control'}),
-            'id_estado_civil':forms.Select(attrs={'type':'text', 'class':'form-select'}),
-            'id_sexo':forms.Select(attrs={'type':'text', 'class':'form-select'}),
-            'id_direccion':forms.Select(attrs={'type':'text', 'class':'form-select'}),
+            'nombre':forms.TextInput(
+                attrs={'type':'text', 'class':'form-control', 'id':'nombrePaciente'}
+            ),
+            'apellido':forms.TextInput(
+                attrs={'type':'text', 'class':'form-control', 'id':'apellidoPaciente'}
+            ),
+            'fecha_nacimiento' : forms.TextInput(
+                attrs={'type':'date', 'class':'form-control', 'id':'fechaNacimientoPaciente'}
+            ),
+            'id_estado_civil':forms.Select(
+                attrs={'type':'text', 'class':'form-select', 'id':'estadoCivilPaciente'}
+            ),
+            'id_sexo':forms.Select(
+                attrs={'type':'text', 'class':'form-select', 'id':'sexoPaciente'}
+            ),
+            'id_direccion':forms.Select(
+                attrs={'type':'text', 'class':'form-select', 'id':'direccionPaciente'}
+            ),
         }

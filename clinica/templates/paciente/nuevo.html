@@ -3,20 +3,42 @@
 {% block title %}Nuevo Paciente{% endblock title %}
 
 {% block content %}
-    <div class="contenedor">
-        <h1>Nuevo paciente</h1>
-        <form method="post">
-            {% csrf_token %}
-            {{ form.as_p }}
-            <div class="row">
-                <div class="col-auto">
-                    <a href="{% url 'paciente:index' %}" class="btn btn-danger">Cancelar</a>
-                </div>
-                <div class="col-auto">
-                    <button type="submit" class="btn btn-primary">Guardar</button>
-                </div>
+<div class="contenedor">
+    <h1>Nuevo paciente</h1>
+    <form method="post">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="nombrePaciente" class="form-label">Nombre</label>
+            {{ form.nombre }}
+        </div>
+        <div class="mb-3">
+            <label for="apellidoPaciente" class="form-label">Apellido</label>
+            {{ form.apellido }}
+        </div>
+        <div class="mb-3">
+            <label for="fechaNacimientoPaciente" class="form-label">Fecha de Nacimiento</label>
+            {{ form.fecha_nacimiento }}
+        </div>
+        <div class="mb-3">
+            <label for="estadoCivilPaciente" class="form-label">Estado Civil</label>
+            {{ form.id_estado_civil }}
+        </div>
+        <div class="mb-3">
+            <label for="sexoPaciente" class="form-label">Sexo</label>
+            {{ form.id_sexo }}
+        </div>
+        <div class="mb-3">
+            <label for="direccionPaciente" class="form-label">Direccion</label>
+            {{ form.id_direccion }}
+        </div>
+        <div class="row">
+            <div class="col-auto">
+                <a href="{% url 'paciente:index' %}" class="btn btn-danger">Cancelar</a>
             </div>
-        </form>
-    </div>
+            <div class="col-auto">
+                <button type="submit" class="btn btn-primary">Guardar</button>
+            </div>
+        </div>
+    </form>
+</div>
 {% endblock content %}
-    

@@ -1,6 +1,11 @@
 """Forms Paciente"""
+#Django
 from django import forms
+from django.forms import widgets
+
+#Models
 from .models import Paciente
+from .models import Direccion
 
 class PacienteForm(forms.ModelForm):
     """Form definition for Paciente."""
@@ -14,7 +19,6 @@ class PacienteForm(forms.ModelForm):
             'fecha_nacimiento',
             'id_estado_civil',
             'id_sexo',
-            'id_direccion',
         )
         widgets = {
             'nombre':forms.TextInput(
@@ -32,7 +36,24 @@ class PacienteForm(forms.ModelForm):
             'id_sexo':forms.Select(
                 attrs={'type':'text', 'class':'form-select', 'id':'sexoPaciente'}
             ),
-            'id_direccion':forms.Select(
-                attrs={'type':'text', 'class':'form-select', 'id':'direccionPaciente'}
+        }
+
+class DireccionForm(forms.ModelForm):
+    """Form definition for Direccion."""
+
+    class Meta:
+        """Meta definition for Direccionform."""
+
+        model = Direccion
+        fields = (
+            'direccion',
+            'id_municipio',
+        )
+        widgets = {
+            'direccion':forms.TextInput(
+                attrs={'type':'text', 'class':'form-control', 'id':'direccionDireccion'}
+            ),
+            'id_municipio':forms.Select(
+                attrs={'type':'text', 'class':'form-select', 'id':'municipioDireccion'}
             ),
         }

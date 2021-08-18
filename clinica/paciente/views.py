@@ -4,6 +4,7 @@ from django.shortcuts import redirect, render, get_object_or_404
 
 # Forms
 from .forms import PacienteForm
+from .forms import DireccionForm
 
 # Models
 from .models import Paciente
@@ -38,12 +39,19 @@ def nuevo_paciente(request):
     """Agrega un nuevo paciente atraves de un formulario"""
 
     if request.method == 'POST':
-        form = PacienteForm(request.POST)
-        if form.is_valid():
-            form.save()
+        form_paciente = PacienteForm(request.POST)
+        form_direccion = DireccionForm(request.POST)
+        if form_paciente.is_valid() and form_direccion.is_valid():
+            paciente = form_paciente.save(commit=False)
+            paciente.id_direccion = form_direccion.save()
+            paciente.save()
             return redirect('paciente:index')
     else:
-        return render(request, 'paciente/nuevo.html', context={'form': PacienteForm()})
+        context={
+            'form_paciente': PacienteForm(),
+            'form_direccion': DireccionForm(),
+        }
+        return render(request, 'paciente/nuevo.html', context)
 
 
 def editar_paciente(request, id_paciente):

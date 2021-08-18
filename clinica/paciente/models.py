@@ -63,7 +63,7 @@ class Municipio(models.Model):
     )
 
     def __str__(self):
-        return self.municipio
+        return f'{self.municipio} - {self.id_departamento}'
 
     class Meta:
         db_table = 'municipio'

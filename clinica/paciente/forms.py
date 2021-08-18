@@ -1,11 +1,11 @@
 """Forms Paciente"""
 #Django
 from django import forms
-from django.forms import widgets
 
 #Models
 from .models import Paciente
 from .models import Direccion
+from .models import TelefonoPaciente
 
 class PacienteForm(forms.ModelForm):
     """Form definition for Paciente."""
@@ -21,19 +21,19 @@ class PacienteForm(forms.ModelForm):
             'id_sexo',
         )
         widgets = {
-            'nombre':forms.TextInput(
+            'nombre' : forms.TextInput(
                 attrs={'type':'text', 'class':'form-control', 'id':'nombrePaciente'}
             ),
-            'apellido':forms.TextInput(
+            'apellido' : forms.TextInput(
                 attrs={'type':'text', 'class':'form-control', 'id':'apellidoPaciente'}
             ),
             'fecha_nacimiento' : forms.TextInput(
                 attrs={'type':'date', 'class':'form-control', 'id':'fechaNacimientoPaciente'}
             ),
-            'id_estado_civil':forms.Select(
+            'id_estado_civil' : forms.Select(
                 attrs={'type':'text', 'class':'form-select', 'id':'estadoCivilPaciente'}
             ),
-            'id_sexo':forms.Select(
+            'id_sexo' : forms.Select(
                 attrs={'type':'text', 'class':'form-select', 'id':'sexoPaciente'}
             ),
         }
@@ -50,10 +50,27 @@ class DireccionForm(forms.ModelForm):
             'id_municipio',
         )
         widgets = {
-            'direccion':forms.TextInput(
+            'direccion' : forms.TextInput(
                 attrs={'type':'text', 'class':'form-control', 'id':'direccionDireccion'}
             ),
-            'id_municipio':forms.Select(
+            'id_municipio' : forms.Select(
                 attrs={'type':'text', 'class':'form-select', 'id':'municipioDireccion'}
             ),
+        }
+
+class TelefonoPacienteForm(forms.ModelForm):
+    """Form definition for TelefonoPaciente."""
+
+    class Meta:
+        """Meta definition for TelefonoPacienteform."""
+
+        model = TelefonoPaciente
+        fields = (
+            'id_telefono_paciente',
+            'telefono_paciente',
+        )
+        widgets = {
+            'telefono_paciente' : forms.TextInput(
+                attrs={'type':'number', 'class':'form-control', 'id':'telefonoTelefonoPaciente'}
+            )
         }

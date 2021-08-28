@@ -6,6 +6,7 @@ from django.shortcuts import redirect, render, get_object_or_404
 from .forms import PacienteForm
 from .forms import TelefonoPacienteForm
 from .forms import DireccionForm
+from .forms import EmailPacienteForm
 
 # Models
 from .models import Paciente
@@ -43,9 +44,15 @@ def nuevo_paciente(request):
         form_paciente = PacienteForm(request.POST)
         form_direccion = DireccionForm(request.POST)
         form_telefono = TelefonoPacienteForm(request.POST)
-        if form_paciente.is_valid() and form_direccion.is_valid() and form_telefono.is_valid():
+        form_email = EmailPacienteForm(request.POST)
+        if (form_paciente.is_valid() and
+            form_direccion.is_valid() and
+            form_telefono.is_valid() and
+            form_email.is_valid()
+        ):
             paciente = form_paciente.save(commit=False)
             telefono_paciente = form_telefono.save(commit=False)
+            email_paciente = form_email.save(commit=False)
 
             direccion = form_direccion.save()
 
@@ -55,12 +62,16 @@ def nuevo_paciente(request):
             telefono_paciente.id_paciente = paciente
             telefono_paciente.save()
 
+            email_paciente.id_paciente = paciente
+            email_paciente.save()
+
             return redirect('paciente:index')
     else:
         context={
             'form_paciente' : PacienteForm(),
             'form_direccion' : DireccionForm(),
             'form_telefono' : TelefonoPacienteForm(),
+            'form_email' : EmailPacienteForm(),
         }
         return render(request, 'paciente/nuevo.html', context)
 

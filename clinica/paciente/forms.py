@@ -6,6 +6,7 @@ from django import forms
 from .models import Paciente
 from .models import Direccion
 from .models import TelefonoPaciente
+from .models import EmailPaciente
 
 class PacienteForm(forms.ModelForm):
     """Form definition for Paciente."""
@@ -72,5 +73,21 @@ class TelefonoPacienteForm(forms.ModelForm):
         widgets = {
             'telefono_paciente' : forms.TextInput(
                 attrs={'type':'number', 'class':'form-control', 'id':'telefonoTelefonoPaciente'}
+            )
+        }
+
+class EmailPacienteForm(forms.ModelForm):
+    """Form definition for EmailPaciente."""
+
+    class Meta:
+        """Meta definition for EmailPacienteform."""
+
+        model = EmailPaciente
+        fields = (
+            'email_paciente',
+        )
+        widgets = {
+            'email_paciente': forms.TextInput(
+                attrs={'type':'email', 'class': 'form-control', 'id' : 'emailEmailpaciente'}
             )
         }

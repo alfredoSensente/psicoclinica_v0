@@ -7,6 +7,7 @@ from .models import Paciente
 from .models import Direccion
 from .models import TelefonoPaciente
 from .models import EmailPaciente
+from .models import Referencia
 
 class PacienteForm(forms.ModelForm):
     """Form definition for Paciente."""
@@ -89,5 +90,25 @@ class EmailPacienteForm(forms.ModelForm):
         widgets = {
             'email_paciente': forms.TextInput(
                 attrs={'type':'email', 'class': 'form-control', 'id' : 'emailEmailpaciente'}
+            )
+        }
+
+class ReferenciaForm(forms.ModelForm):
+    """Form definition for Referencia."""
+
+    class Meta:
+        """Meta definition for Referenciaform."""
+
+        model = Referencia
+        fields = (
+            'nombre_referencia',
+            'id_tipo_referencia',
+        )
+        widgets = {
+            'nombre_referencia':forms.TextInput(
+                attrs={'type':'text', 'class':'form-control', 'id': 'pacienteNombreReferencia'}
+            ),
+            'id_tipo_referencia':forms.Select(
+                attrs={'class':'form-select', 'id':'pacienteTipoReferencia'}
             )
         }

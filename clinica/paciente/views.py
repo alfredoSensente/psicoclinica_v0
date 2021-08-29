@@ -7,6 +7,7 @@ from .forms import PacienteForm
 from .forms import TelefonoPacienteForm
 from .forms import DireccionForm
 from .forms import EmailPacienteForm
+from .forms import ReferenciaForm
 
 # Models
 from .models import Paciente
@@ -45,14 +46,17 @@ def nuevo_paciente(request):
         form_direccion = DireccionForm(request.POST)
         form_telefono = TelefonoPacienteForm(request.POST)
         form_email = EmailPacienteForm(request.POST)
+        form_referencia = ReferenciaForm(request.POST)
         if (form_paciente.is_valid() and
             form_direccion.is_valid() and
             form_telefono.is_valid() and
-            form_email.is_valid()
+            form_email.is_valid() and
+            form_referencia.is_valid()
         ):
             paciente = form_paciente.save(commit=False)
             telefono_paciente = form_telefono.save(commit=False)
             email_paciente = form_email.save(commit=False)
+            referencia = form_referencia.save(commit=False)
 
             direccion = form_direccion.save()
 
@@ -65,6 +69,9 @@ def nuevo_paciente(request):
             email_paciente.id_paciente = paciente
             email_paciente.save()
 
+            referencia.id_paciente = paciente
+            referencia.save()
+
             return redirect('paciente:index')
     else:
         context={
@@ -72,6 +79,7 @@ def nuevo_paciente(request):
             'form_direccion' : DireccionForm(),
             'form_telefono' : TelefonoPacienteForm(),
             'form_email' : EmailPacienteForm(),
+            'form_referencia' : ReferenciaForm(),
         }
         return render(request, 'paciente/nuevo.html', context)
 

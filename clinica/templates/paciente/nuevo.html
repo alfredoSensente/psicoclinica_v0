@@ -44,6 +44,15 @@
             <label for="sexoPaciente" class="form-label">Direccion</label>
             {{ form_direccion.direccion }}
         </div>
+        <h3>Referencia</h3>
+        <div class="mb-3">
+            <label for="pacienteNombreReferencia" class="form-label">Nombre</label>
+            {{ form_referencia.nombre_referencia }}
+        </div>
+        <div class="mb-3">
+            <label for="pacienteTipoReferencia" class="form-label">Tipo Referencia</label>
+            {{ form_referencia.id_tipo_referencia }}
+        </div>
         <div class="row">
             <div class="col-auto">
                 <a href="{% url 'paciente:index' %}" class="btn btn-danger">Cancelar</a>

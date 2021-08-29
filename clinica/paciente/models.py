@@ -130,7 +130,7 @@ class Paciente(models.Model):
 class Referencia(models.Model):
     """Referencia"""
     id_referencia = models.AutoField(primary_key=True)
-    nombre = models.CharField(max_length=45)
+    nombre_referencia = models.CharField(max_length=45)
     id_tipo_referencia = models.ForeignKey(
         TipoReferencia,
         on_delete=models.CASCADE,
@@ -143,7 +143,7 @@ class Referencia(models.Model):
     )
 
     def __str__(self):
-        return self.nombre
+        return self.nombre_referencia
 
     class Meta:
         db_table = 'referencia'

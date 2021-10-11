@@ -53,6 +53,31 @@
             <label for="pacienteTipoReferencia" class="form-label">Tipo Referencia</label>
             {{ form_referencia.id_tipo_referencia }}
         </div>
+        <h3>Contacto</h3>
+        <div class="mb-3">
+            <label for="nombreContacto" class="form-label">Nombre</label>
+            {{ form_contacto.nombre_contacto }}
+        </div>
+        <div class="mb-3">
+            <label for="apellidoContacto" class="form-label">Apellido</label>
+            {{ form_contacto.apellido_contacto }}
+        </div>
+        <div class="mb-3">
+            <label for="responsableContacto" class="form-label">Responsable</label>
+            {{ form_contacto.responsable_contacto }}
+        </div>
+        <div class="mb-3">
+            <label for="tipoContactoContacto" class="form-label">Tipo de Contacto</label>
+            {{ form_contacto.id_tipo_contacto }}
+        </div>
+        <div class="mb-3">
+            <label for="telefonoTelefonoContacto" class="form-label">Telefono de Contacto</label>
+            {{ form_telefono_contacto.telefono_contacto }}
+        </div>
+        <div class="mb-3">
+            <label for="sexoContacto" class="form-label">Sexo</label>
+            {{ form_contacto.id_sexo_contacto }}
+        </div>
         <div class="row">
             <div class="col-auto">
                 <a href="{% url 'paciente:index' %}" class="btn btn-danger">Cancelar</a>

@@ -186,9 +186,9 @@ class EmailPaciente(models.Model):
 class Contacto(models.Model):
     """Contacto"""
     id_contacto = models.AutoField(primary_key=True)
-    nombre = models.CharField(max_length=45)
-    apellido = models.CharField(max_length=45)
-    responsable = models.BooleanField()
+    nombre_contacto = models.CharField(max_length=45)
+    apellido_contacto = models.CharField(max_length=45)
+    responsable_contacto = models.BooleanField()
     id_paciente = models.ForeignKey(
         Paciente,
         on_delete = models.CASCADE,
@@ -199,14 +199,14 @@ class Contacto(models.Model):
         on_delete = models.CASCADE,
         db_column = 'id_tipo_contacto'
     )
-    id_sexo = models.ForeignKey(
+    id_sexo_contacto = models.ForeignKey(
         Sexo,
         on_delete=models.CASCADE,
         db_column='id_sexo'
     )
 
     def __str__(self):
-        return self.nombre+ " " + self.apellido
+        return self.nombre_contacto+ " " + self.apellido_contacto
 
     class Meta:
         db_table = 'contacto'

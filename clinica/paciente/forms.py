@@ -5,11 +5,9 @@ from django import forms
 #Models
 from .models import Paciente
 from .models import Direccion
-from .models import TelefonoPaciente
-from .models import EmailPaciente
 from .models import Referencia
 from .models import Contacto
-from .models import TelefonoContacto
+
 
 class PacienteForm(forms.ModelForm):
     """Form definition for Paciente."""
@@ -18,21 +16,29 @@ class PacienteForm(forms.ModelForm):
 
         model = Paciente
         fields = (
-            'nombre',
-            'apellido',
-            'fecha_nacimiento',
+            'nombre_paciente',
+            'apellido_paciente',
+            'fecha_nacimiento_paciente',
+            'email_paciente',
+            'telefono_paciente',
             'id_estado_civil',
             'id_sexo',
         )
         widgets = {
-            'nombre' : forms.TextInput(
+            'nombre_paciente' : forms.TextInput(
                 attrs={'type':'text', 'class':'form-control', 'id':'nombrePaciente'}
             ),
-            'apellido' : forms.TextInput(
+            'apellido_paciente' : forms.TextInput(
                 attrs={'type':'text', 'class':'form-control', 'id':'apellidoPaciente'}
             ),
-            'fecha_nacimiento' : forms.TextInput(
+            'fecha_nacimiento_paciente' : forms.TextInput(
                 attrs={'type':'date', 'class':'form-control', 'id':'fechaNacimientoPaciente'}
+            ),
+            'email_paciente' : forms.TextInput(
+                attrs={'type':'text', 'class':'form-control', 'id':'emailPaciente'}
+            ),
+            'telefono_paciente' : forms.TextInput(
+                attrs={'type':'text', 'class':'form-control', 'id':'telefonoPaciente'}
             ),
             'id_estado_civil' : forms.Select(
                 attrs={'type':'text', 'class':'form-select', 'id':'estadoCivilPaciente'}
@@ -41,6 +47,7 @@ class PacienteForm(forms.ModelForm):
                 attrs={'type':'text', 'class':'form-select', 'id':'sexoPaciente'}
             ),
         }
+
 
 class DireccionForm(forms.ModelForm):
     """Form definition for Direccion."""
@@ -62,37 +69,6 @@ class DireccionForm(forms.ModelForm):
             ),
         }
 
-class TelefonoPacienteForm(forms.ModelForm):
-    """Form definition for TelefonoPaciente."""
-
-    class Meta:
-        """Meta definition for TelefonoPacienteform."""
-
-        model = TelefonoPaciente
-        fields = (
-            'telefono_paciente',
-        )
-        widgets = {
-            'telefono_paciente' : forms.TextInput(
-                attrs={'type':'number', 'class':'form-control', 'id':'telefonoTelefonoPaciente'}
-            )
-        }
-
-class EmailPacienteForm(forms.ModelForm):
-    """Form definition for EmailPaciente."""
-
-    class Meta:
-        """Meta definition for EmailPacienteform."""
-
-        model = EmailPaciente
-        fields = (
-            'email_paciente',
-        )
-        widgets = {
-            'email_paciente': forms.TextInput(
-                attrs={'type':'email', 'class': 'form-control', 'id' : 'emailEmailpaciente'}
-            )
-        }
 
 class ReferenciaForm(forms.ModelForm):
     """Form definition for Referencia."""
@@ -114,6 +90,7 @@ class ReferenciaForm(forms.ModelForm):
             )
         }
 
+
 class ContactoForm(forms.ModelForm):
     """Form definition for Contacto."""
 
@@ -125,6 +102,7 @@ class ContactoForm(forms.ModelForm):
             'nombre_contacto',
             'apellido_contacto',
             'responsable_contacto',
+            'telefono_contacto',
             'id_tipo_contacto',
             'id_sexo_contacto',
         )
@@ -138,26 +116,13 @@ class ContactoForm(forms.ModelForm):
             'responsable_contacto' : forms.CheckboxInput(
                 attrs={'type':'checkbox', 'class':'form-check-input', 'id':'responsableContacto'}
             ),
+            'telefono_contacto' : forms.TextInput(
+                attrs={'type':'text', 'class':'form-control', 'id':'telefonoContacto'}
+            ),
             'id_sexo_contacto' : forms.Select(
                 attrs={'type':'text', 'class':'form-select', 'id':'sexoContacto'}
             ),
             'id_tipo_contacto' : forms.Select(
                 attrs={'type':'text', 'class':'form-select', 'id':'tipoContactoContacto'}
             ),
-        }
-
-class TelefonoContactoForm(forms.ModelForm):
-    """Form definition for TelefonoContacto."""
-
-    class Meta:
-        """Meta definition for TelefonoContactoform."""
-
-        model = TelefonoContacto
-        fields = (
-            'telefono_contacto',
-        )
-        widgets = {
-            'telefono_contacto' : forms.TextInput(
-                attrs={'type':'number', 'class':'form-control', 'id':'telefonoTelefonoContacto'}
-            )
         }

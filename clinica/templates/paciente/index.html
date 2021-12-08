@@ -44,9 +44,9 @@
                 {% for paciente in lista_paciente %}
                 <tr>
                     <th scope="row">{{ paciente.id_paciente }}</th>
-                    <td>{{ paciente.nombre }}</td>
-                    <td>{{ paciente.apellido }}</td>
-                    <td>{{ paciente.fecha_nacimiento }}</td>
+                    <td>{{ paciente.nombre_paciente }}</td>
+                    <td>{{ paciente.apellido_paciente }}</td>
+                    <td>{{ paciente.fecha_nacimiento_paciente }}</td>
                     <td>
                         <a href="{% url 'paciente:borrar' paciente.id_paciente %}"><img
                                 src="{% static 'bootstrap/icons/trash.svg' %}" alt="trash" width="24" height="24"></a>

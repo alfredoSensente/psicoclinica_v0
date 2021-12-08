@@ -4,12 +4,9 @@ from django.shortcuts import redirect, render, get_object_or_404
 
 # Forms
 from .forms import PacienteForm
-from .forms import TelefonoPacienteForm
 from .forms import DireccionForm
-from .forms import EmailPacienteForm
 from .forms import ReferenciaForm
 from .forms import ContactoForm
-from .forms import TelefonoContactoForm
 
 # Models
 from .models import Paciente
@@ -46,56 +43,35 @@ def nuevo_paciente(request):
     if request.method == 'POST':
         form_paciente = PacienteForm(request.POST)
         form_direccion = DireccionForm(request.POST)
-        form_telefono = TelefonoPacienteForm(request.POST)
-        form_email = EmailPacienteForm(request.POST)
         form_referencia = ReferenciaForm(request.POST)
-        form_telefono_contacto = TelefonoContactoForm(request.POST)
         form_contacto = ContactoForm(request.POST)
         if (form_paciente.is_valid() and
             form_direccion.is_valid() and
-            form_telefono.is_valid() and
-            form_email.is_valid() and
             form_referencia.is_valid() and
-            form_telefono_contacto.is_valid() and
             form_contacto.is_valid()
         ):
             paciente = form_paciente.save(commit=False)
-            telefono_paciente = form_telefono.save(commit=False)
-            telefono_contacto = form_telefono_contacto.save(commit=False)
             contacto = form_contacto.save(commit=False)
-            email_paciente = form_email.save(commit=False)
             referencia = form_referencia.save(commit=False)
             #Guarda direccion
             direccion = form_direccion.save()
             #Guarda paciente
             paciente.id_direccion = direccion
             paciente.save()
-            #Guarda telefono del paciente
-            telefono_paciente.id_paciente = paciente
-            telefono_paciente.save()
-            #Guarda email
-            email_paciente.id_paciente = paciente
-            email_paciente.save()
             #Guarda referencia
             referencia.id_paciente = paciente
             referencia.save()
             #Guarda contacto
             contacto.id_paciente = paciente
             contacto.save()
-            #Guarda telefono contacto
-            telefono_contacto.id_contacto = contacto
-            telefono_contacto.save()
 
             return redirect('paciente:index')
     else:
         context={
             'form_paciente' : PacienteForm(),
             'form_direccion' : DireccionForm(),
-            'form_telefono' : TelefonoPacienteForm(),
-            'form_email' : EmailPacienteForm(),
             'form_referencia' : ReferenciaForm(),
             'form_contacto': ContactoForm(),
-            'form_telefono_contacto': TelefonoContactoForm(),
         }
         return render(request, 'paciente/nuevo.html', context)
 

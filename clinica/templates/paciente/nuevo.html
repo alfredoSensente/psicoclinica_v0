@@ -9,15 +9,15 @@
         {% csrf_token %}
         <div class="mb-3">
             <label for="nombrePaciente" class="form-label">Nombre</label>
-            {{ form_paciente.nombre }}
+            {{ form_paciente.nombre_paciente }}
         </div>
         <div class="mb-3">
             <label for="apellidoPaciente" class="form-label">Apellido</label>
-            {{ form_paciente.apellido }}
+            {{ form_paciente.apellido_paciente }}
         </div>
         <div class="mb-3">
             <label for="fechaNacimientoPaciente" class="form-label">Fecha de Nacimiento</label>
-            {{ form_paciente.fecha_nacimiento }}
+            {{ form_paciente.fecha_nacimiento_paciente }}
         </div>
         <div class="mb-3">
             <label for="estadoCivilPaciente" class="form-label">Estado Civil</label>
@@ -29,11 +29,11 @@
         </div>
         <div class="mb-3">
             <label for="telefonoTelefonoPaciente" class="form-label">Telefono</label>
-            {{ form_telefono.telefono_paciente }}
+            {{ form_paciente.telefono_paciente }}
         </div>
         <div class="mb-3">
             <label for="emailEmailPaciente" class="form-label">Correo Electronico</label>
-            {{ form_email.email_paciente }}
+            {{ form_paciente.email_paciente }}
         </div>
         <h3>Direccion</h3>
         <div class="mb-3">
@@ -72,7 +72,7 @@
         </div>
         <div class="mb-3">
             <label for="telefonoTelefonoContacto" class="form-label">Telefono de Contacto</label>
-            {{ form_telefono_contacto.telefono_contacto }}
+            {{ form_contacto.telefono_contacto }}
         </div>
         <div class="mb-3">
             <label for="sexoContacto" class="form-label">Sexo</label>

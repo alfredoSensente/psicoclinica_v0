@@ -5,12 +5,22 @@
 {% block content %}
     <div class="contenedor">
         <h1>Detalle paciente</h1>
-        <h2>{{ paciente.nombre }} {{ paciente.apellido }}</h2>
-        <p>Fecha de nacimiento: {{ paciente.fecha_nacimiento }}</p>
-        <p>Religion: {{ paciente.id_religion }}</p>
+        <h2>{{ paciente.nombre_paciente }} {{ paciente.apellido_paciente }}</h2>
+        <p>Fecha de nacimiento: {{ paciente.fecha_nacimiento_paciente }}</p>
         <p>Estado civil: {{ paciente.id_estado_civil }}</p>
         <p>Sexo: {{ paciente.id_sexo }}</p>
-
+        <p>Telefono: {{ paciente.telefono_paciente}}</p>
+        <hr>
+        <h4>Contactos</h4>
+        
+        {% if lista_contactos %}
+            <ol>
+            {% for contacto in lista_contactos %}
+                <li>{{ contacto }}</li>
+            {% endfor %}
+            </ol>
+        {% endif %}
+            
         <div class="row">
             <div class="col-auto">
                 <a href="{% url 'paciente:index' %}" class="btn btn-primary">Atrás</a>

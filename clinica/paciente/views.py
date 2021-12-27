@@ -1,6 +1,6 @@
 """Views Paciente"""
 # Django
-from django.shortcuts import redirect, render, get_object_or_404
+from django.shortcuts import get_list_or_404, redirect, render, get_object_or_404
 
 # Forms
 from .forms import PacienteForm
@@ -9,7 +9,7 @@ from .forms import ReferenciaForm
 from .forms import ContactoForm
 
 # Models
-from .models import Paciente
+from .models import Contacto, Paciente
 
 # Create your views here.
 
@@ -17,13 +17,13 @@ from .models import Paciente
 def index(request):
     """Devuelve un listado de pacientes"""
     if request.method == 'POST':
-        if request.POST['opcion-paciente'] == 'nombre':
+        if request.POST['opcion-paciente'] == 'nombre_paciente':
             lista_paciente = Paciente.objects.filter(
-                nombre__icontains=request.POST['busqueda-paciente']
+                nombre_paciente__icontains=request.POST['busqueda-paciente']
             )
-        elif request.POST['opcion-paciente'] == 'apellido':
+        elif request.POST['opcion-paciente'] == 'apellido_paciente':
             lista_paciente = Paciente.objects.filter(
-                apellido__icontains=request.POST['busqueda-paciente']
+                apellido_paciente__icontains=request.POST['busqueda-paciente']
             )
         elif request.POST['opcion-paciente'] == 'sexo':
             lista_paciente = Paciente.objects.filter(
@@ -97,8 +97,10 @@ def detalle_paciente(request, id_paciente):
     """Patient detail"""
 
     paciente_detalle = get_object_or_404(Paciente, pk=id_paciente)
+    lista_contactos = get_list_or_404(Contacto, id_paciente=id_paciente)
     context = {
-        'paciente': paciente_detalle
+        'paciente': paciente_detalle,
+        'lista_contactos': lista_contactos,
     }
     return render(request, 'paciente/detalle.html', context)
 

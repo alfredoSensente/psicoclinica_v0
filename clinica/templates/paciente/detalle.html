@@ -3,32 +3,73 @@
 {% block title %}Detalle Paciente{% endblock title %}
 
 {% block content %}
-    <div class="contenedor">
+    <div class="container mt-4 mb-4">
         <h1>Detalle paciente</h1>
         <h2>{{ paciente.nombre_paciente }} {{ paciente.apellido_paciente }}</h2>
-        <p>Fecha de nacimiento: {{ paciente.fecha_nacimiento_paciente }}</p>
-        <p>Estado civil: {{ paciente.id_estado_civil }}</p>
-        <p>Sexo: {{ paciente.id_sexo }}</p>
-        <p>Telefono: {{ paciente.telefono_paciente}}</p>
-        <hr>
-        <h4>Contactos</h4>
-        
-        {% if lista_contactos %}
-            <ol>
-            {% for contacto in lista_contactos %}
-                <li>{{ contacto }}</li>
-            {% endfor %}
-            </ol>
-        {% endif %}
-            
         <div class="row">
-            <div class="col-auto">
-                <a href="{% url 'paciente:index' %}" class="btn btn-primary">Atrás</a>
+            <div class="col">
+                <p>Fecha de nacimiento: {{ paciente.fecha_nacimiento_paciente }}</p>
+                <p>Estado civil: {{ paciente.id_estado_civil }}</p>
+                <p>Sexo: {{ paciente.id_sexo }}</p>
+                <p>Telefono: {{ paciente.telefono_paciente}}</p>
             </div>
-            <div class="col-auto">
-                <a href="{% url 'paciente:editar' paciente.id_paciente %}" class="btn btn-primary">Editar</a>
+            <div class="col">
+                <h4>Contactos</h4>
+                {% if lista_contactos %}
+                    <ol>
+                    {% for contacto in lista_contactos %}
+                        <li>{{ contacto }}</li>
+                    {% endfor %}
+                    </ol>
+                {% endif %}
             </div>
         </div>
+            
+        <div class="row">
+            <div class="col">
+                <a href="{% url 'paciente:index' %}" class="btn btn-primary">Atrás</a>
+                <a href="{% url 'paciente:editar' paciente.id_paciente %}" class="btn btn-primary">Editar</a>
+            </div>
+            <div class="col">
+                <button class="btn btn-primary">Nuevo contacto</button>
+            </div>
+            
+        </div>
+        <hr>
+        <div class="accordion" id="accordionExample">
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="headingOne">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                  Tratamientos Previos
+                </button>
+              </h2>
+              <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                    {% if tratamientos %}
+            
+                    {% else %}
+                        <p>Este paciente no ha tenido ningun tratamiento</p>
+                    {% endif %}
+                </div>
+              </div>
+            </div>
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="headingTwo">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                  Padecimientos
+                </button>
+              </h2>
+              <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                    {% if padecimientos %}
+            
+                    {% else %}
+                        <p>No hay registro de padecimientos</p>
+                    {% endif %}
+                </div>
+              </div>
+            </div>
+          </div>
 
     </div>
 {% endblock content %}

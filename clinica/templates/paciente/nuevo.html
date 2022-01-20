@@ -3,82 +3,97 @@
 {% block title %}Nuevo Paciente{% endblock title %}
 
 {% block content %}
-<div class="contenedor">
-    <h1>Nuevo paciente</h1>
+<div class="container border rounded mt-4 mb-4">
+    <h1 class="row justify-content-md-center mt-4">Nuevo paciente</h1>
     <form method="post">
         {% csrf_token %}
-        <div class="mb-3">
-            <label for="nombrePaciente" class="form-label">Nombre</label>
-            {{ form_paciente.nombre_paciente }}
-        </div>
-        <div class="mb-3">
-            <label for="apellidoPaciente" class="form-label">Apellido</label>
-            {{ form_paciente.apellido_paciente }}
-        </div>
-        <div class="mb-3">
-            <label for="fechaNacimientoPaciente" class="form-label">Fecha de Nacimiento</label>
-            {{ form_paciente.fecha_nacimiento_paciente }}
-        </div>
-        <div class="mb-3">
-            <label for="estadoCivilPaciente" class="form-label">Estado Civil</label>
-            {{ form_paciente.id_estado_civil }}
-        </div>
-        <div class="mb-3">
-            <label for="sexoPaciente" class="form-label">Sexo</label>
-            {{ form_paciente.id_sexo }}
-        </div>
-        <div class="mb-3">
-            <label for="telefonoTelefonoPaciente" class="form-label">Telefono</label>
-            {{ form_paciente.telefono_paciente }}
-        </div>
-        <div class="mb-3">
-            <label for="emailEmailPaciente" class="form-label">Correo Electronico</label>
-            {{ form_paciente.email_paciente }}
-        </div>
-        <h3>Direccion</h3>
-        <div class="mb-3">
-            <label for="direccionPaciente" class="form-label">Municipio</label>
-            {{ form_direccion.id_municipio }}
-        </div>
-        <div class="mb-3">
-            <label for="sexoPaciente" class="form-label">Direccion</label>
-            {{ form_direccion.direccion }}
-        </div>
-        <h3>Referencia</h3>
-        <div class="mb-3">
-            <label for="pacienteNombreReferencia" class="form-label">Nombre</label>
-            {{ form_referencia.nombre_referencia }}
-        </div>
-        <div class="mb-3">
-            <label for="pacienteTipoReferencia" class="form-label">Tipo Referencia</label>
-            {{ form_referencia.id_tipo_referencia }}
-        </div>
-        <h3>Contacto</h3>
-        <div class="mb-3">
-            <label for="nombreContacto" class="form-label">Nombre</label>
-            {{ form_contacto.nombre_contacto }}
-        </div>
-        <div class="mb-3">
-            <label for="apellidoContacto" class="form-label">Apellido</label>
-            {{ form_contacto.apellido_contacto }}
-        </div>
-        <div class="mb-3">
-            <label for="responsableContacto" class="form-label">Responsable</label>
-            {{ form_contacto.responsable_contacto }}
-        </div>
-        <div class="mb-3">
-            <label for="tipoContactoContacto" class="form-label">Tipo de Contacto</label>
-            {{ form_contacto.id_tipo_contacto }}
-        </div>
-        <div class="mb-3">
-            <label for="telefonoTelefonoContacto" class="form-label">Telefono de Contacto</label>
-            {{ form_contacto.telefono_contacto }}
-        </div>
-        <div class="mb-3">
-            <label for="sexoContacto" class="form-label">Sexo</label>
-            {{ form_contacto.id_sexo_contacto }}
-        </div>
         <div class="row">
+            <div class="col">
+                <div class="rounded border p-4 m-4">
+                    <div class="mb-3">
+                        <label for="nombrePaciente" class="form-label">Nombre</label>
+                        {{ form_paciente.nombre_paciente }}
+                    </div>
+                    <div class="mb-3">
+                        <label for="apellidoPaciente" class="form-label">Apellido</label>
+                        {{ form_paciente.apellido_paciente }}
+                    </div>
+                    <div class="mb-3">
+                        <label for="fechaNacimientoPaciente" class="form-label">Fecha de Nacimiento</label>
+                        {{ form_paciente.fecha_nacimiento_paciente }}
+                    </div>
+                    <div class="mb-3">
+                        <label for="estadoCivilPaciente" class="form-label">Estado Civil</label>
+                        {{ form_paciente.id_estado_civil }}
+                    </div>
+                    <div class="mb-3">
+                        <label for="sexoPaciente" class="form-label">Sexo</label>
+                        {{ form_paciente.id_sexo }}
+                    </div>
+                    <div class="mb-3">
+                        <label for="telefonoTelefonoPaciente" class="form-label">Telefono</label>
+                        {{ form_paciente.telefono_paciente }}
+                    </div>
+                    <div class="mb-3">
+                        <label for="emailEmailPaciente" class="form-label">Correo Electronico</label>
+                        {{ form_paciente.email_paciente }}
+                    </div>
+                </div>
+                <div class="rounded border p-4 m-4">
+                    <h3>Direccion</h3>
+                    <div class="mb-3">
+                        <label for="direccionPaciente" class="form-label">Municipio</label>
+                        {{ form_direccion.id_municipio }}
+                    </div>
+                    <div class="mb-3">
+                        <label for="sexoPaciente" class="form-label">Direccion</label>
+                        {{ form_direccion.direccion }}
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="rounded border p-4 m-4">
+                    <h3>Referencia</h3>
+                    <div class="mb-3">
+                        <label for="pacienteNombreReferencia" class="form-label">Nombre</label>
+                        {{ form_referencia.nombre_referencia }}
+                    </div>
+                    <div class="mb-3">
+                        <label for="pacienteTipoReferencia" class="form-label">Tipo Referencia</label>
+                        {{ form_referencia.id_tipo_referencia }}
+                    </div>
+                </div>
+                <div class="rounded border p-4 m-4">
+                    <h3>Contacto</h3>
+                    <div class="mb-3">
+                        <label for="nombreContacto" class="form-label">Nombre</label>
+                        {{ form_contacto.nombre_contacto }}
+                    </div>
+                    <div class="mb-3">
+                        <label for="apellidoContacto" class="form-label">Apellido</label>
+                        {{ form_contacto.apellido_contacto }}
+                    </div>
+                    <div class="mb-3">
+                        <label for="responsableContacto" class="form-label">Responsable</label>
+                        {{ form_contacto.responsable_contacto }}
+                    </div>
+                    <div class="mb-3">
+                        <label for="tipoContactoContacto" class="form-label">Tipo de Contacto</label>
+                        {{ form_contacto.id_tipo_contacto }}
+                    </div>
+                    <div class="mb-3">
+                        <label for="telefonoTelefonoContacto" class="form-label">Telefono de Contacto</label>
+                        {{ form_contacto.telefono_contacto }}
+                    </div>
+                    <div class="mb-3">
+                        <label for="sexoContacto" class="form-label">Sexo</label>
+                        {{ form_contacto.id_sexo_contacto }}
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        <div class="row m-4">
             <div class="col-auto">
                 <a href="{% url 'paciente:index' %}" class="btn btn-danger">Cancelar</a>
             </div>

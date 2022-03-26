@@ -9,7 +9,7 @@ from .forms import ReferenciaForm
 from .forms import ContactoForm
 
 # Models
-from .models import Contacto, Paciente
+from .models import Contacto, Paciente, Direccion, Referencia
 
 # Create your views here.
 
@@ -80,15 +80,43 @@ def editar_paciente(request, id_paciente):
     """update a patient"""
 
     paciente_editar = get_object_or_404(Paciente, pk=id_paciente)
+    direccion_paciente = Direccion.objects.get(pk=paciente_editar.id_direccion.pk)
+    referencia_paciente = Referencia.objects.get(id_paciente=paciente_editar.pk)
+    contacto_paciente = Contacto.objects.get(id_paciente=paciente_editar.pk)
+
+
     if request.method == 'POST':
-        form = PacienteForm(request.POST, instance=paciente_editar)
-        if form.is_valid():
-            form.save()
+        form_paciente = PacienteForm(request.POST, instance=paciente_editar)
+        form_direccion = DireccionForm(request.POST, instance=direccion_paciente)
+        form_referencia = ReferenciaForm(request.POST, instance=referencia_paciente)
+        form_contacto = ContactoForm(request.POST, instance=contacto_paciente)
+        if (form_paciente.is_valid() and
+            form_direccion.is_valid() and
+            form_referencia.is_valid() and
+            form_contacto.is_valid()
+        ):
+            paciente = form_paciente.save(commit=False)
+            contacto = form_contacto.save(commit=False)
+            referencia = form_referencia.save(commit=False)
+            #Guarda direccion
+            direccion = form_direccion.save()
+            #Guarda paciente
+            paciente.id_direccion = direccion
+            paciente.save()
+            #Guarda referencia
+            referencia.id_paciente = paciente
+            referencia.save()
+            #Guarda contacto
+            contacto.id_paciente = paciente
+            contacto.save()
+
             return redirect('paciente:index')
-    else:
-        form = PacienteForm(instance=paciente_editar)
-    context = {
-        'form': form,
+
+    context={
+        'form_paciente' : PacienteForm(instance=paciente_editar),
+        'form_direccion' : DireccionForm(instance=direccion_paciente),
+        'form_referencia' : ReferenciaForm(instance=referencia_paciente),
+        'form_contacto': ContactoForm(instance=contacto_paciente),
     }
     return render(request, 'paciente/editar.html', context)
 

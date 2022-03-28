@@ -85,6 +85,9 @@ class Direccion(models.Model):
     """Direccion"""
     id_direccion = models.AutoField(primary_key=True)
     direccion = models.CharField(max_length=255, null=False)
+    estado = models.IntegerField(max_length=1, default=2, null=False)
+    fecha_registro = models.DateTimeField(auto_now_add=True)
+    fecha_modificacion = models.DateTimeField(auto_now=True)
     id_municipio = models.ForeignKey(
         Municipio,
         on_delete=models.CASCADE,
@@ -106,6 +109,9 @@ class Paciente(models.Model):
     fecha_nacimiento_paciente = models.DateField()
     email_paciente = models.CharField(max_length=45, null=True)
     telefono_paciente = models.CharField(max_length=45)
+    estado = models.IntegerField(max_length=1, default=2, null=False)
+    fecha_registro = models.DateTimeField(auto_now_add=True)
+    fecha_modificacion = models.DateTimeField(auto_now=True)
     id_estado_civil = models.ForeignKey(
         EstadoCivil,
         on_delete=models.CASCADE,
@@ -133,6 +139,9 @@ class Referencia(models.Model):
     """Referencia"""
     id_referencia = models.AutoField(primary_key=True)
     nombre_referencia = models.CharField(max_length=45)
+    estado = models.IntegerField(max_length=1, default=2, null=False)
+    fecha_registro = models.DateTimeField(auto_now_add=True)
+    fecha_modificacion = models.DateTimeField(auto_now=True)
     id_tipo_referencia = models.ForeignKey(
         TipoReferencia,
         on_delete=models.CASCADE,
@@ -158,6 +167,9 @@ class Contacto(models.Model):
     apellido_contacto = models.CharField(max_length=45)
     responsable_contacto = models.BooleanField()
     telefono_contacto = models.CharField(max_length=45)
+    estado = models.IntegerField(max_length=1, default=2, null=False)
+    fecha_registro = models.DateTimeField(auto_now_add=True)
+    fecha_modificacion = models.DateTimeField(auto_now=True)
     id_paciente = models.ForeignKey(
         Paciente,
         on_delete = models.CASCADE,
@@ -205,6 +217,9 @@ class Tratamiento(models.Model):
     fecha_final = models.DateField(null=True)
     alta = models.BooleanField(default=False)
     descripcion = models.TextField(null=True)
+    estado = models.IntegerField(max_length=1, default=2, null=False)
+    fecha_registro = models.DateTimeField(auto_now_add=True)
+    fecha_modificacion = models.DateTimeField(auto_now=True)
     id_expediente_clinico = models.ForeignKey(
         ExpedienteClinico,
         on_delete = models.CASCADE,
@@ -222,6 +237,9 @@ class Medicamento(models.Model):
     """Medicamentos"""
     id_medicamento = models.AutoField(primary_key=True)
     medicamento = models.CharField(max_length=45, null=False)
+    estado = models.IntegerField(max_length=1, default=2, null=False)
+    fecha_registro = models.DateTimeField(auto_now_add=True)
+    fecha_modificacion = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return self.medicamento
@@ -236,6 +254,9 @@ class Padecimiento(models.Model):
     padecimiento = models.CharField(max_length=45, null=False)
     nombre_medico = models.CharField(max_length=45, null=False)
     telefono_medico = models.CharField(max_length=45,null=False)
+    estado = models.IntegerField(max_length=1, default=2, null=False)
+    fecha_registro = models.DateTimeField(auto_now_add=True)
+    fecha_modificacion = models.DateTimeField(auto_now=True)
     id_medicamento = models.ForeignKey(
         Medicamento,
         on_delete=models.CASCADE,

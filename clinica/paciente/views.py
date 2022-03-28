@@ -6,6 +6,7 @@ from django.shortcuts import render
 from django.shortcuts import get_object_or_404
 from django.urls import reverse_lazy
 from django.views import generic
+from django.db.models import Q
 
 # Forms
 from .forms import PacienteForm
@@ -21,21 +22,20 @@ from .models import Contacto, Paciente, Direccion, Referencia
 
 def index(request):
     """Devuelve un listado de pacientes"""
+    lista_paciente = Paciente.objects.filter(Q(estado=2) | Q(estado=1))
     if request.method == 'POST':
         if request.POST['opcion-paciente'] == 'nombre_paciente':
-            lista_paciente = Paciente.objects.filter(
+            lista_paciente = lista_paciente.filter(
                 nombre_paciente__icontains=request.POST['busqueda-paciente']
             )
         elif request.POST['opcion-paciente'] == 'apellido_paciente':
-            lista_paciente = Paciente.objects.filter(
+            lista_paciente = lista_paciente.filter(
                 apellido_paciente__icontains=request.POST['busqueda-paciente']
             )
         elif request.POST['opcion-paciente'] == 'sexo':
-            lista_paciente = Paciente.objects.filter(
+            lista_paciente = lista_paciente.filter(
                 id_sexo__sexo__icontains=request.POST['busqueda-paciente']
             )
-    else:
-        lista_paciente = Paciente.objects.all()
     context = {
         'lista_paciente': lista_paciente,
     }
@@ -133,7 +133,9 @@ def detalle_paciente(request, id_paciente):
     """Patient detail"""
 
     paciente_detalle = get_object_or_404(Paciente, pk=id_paciente)
-    lista_contactos = get_list_or_404(Contacto, id_paciente=id_paciente)
+    contact_queryset = Contacto.objects.filter(Q(estado=1) | Q(estado=2))
+    contact_queryset = contact_queryset.filter(id_paciente=id_paciente)
+    lista_contactos = get_list_or_404(contact_queryset)
     context = {
         'paciente': paciente_detalle,
         'lista_contactos': lista_contactos,
@@ -146,7 +148,8 @@ def borrar_paciente(request, id_paciente):
 
     paciente_borrar = get_object_or_404(Paciente, pk=id_paciente)
     if request.method == 'POST':
-        paciente_borrar.delete()
+        paciente_borrar.estado = 3
+        paciente_borrar.save()
         return render(request, 'paciente/borrar.html')
     context = {
         'paciente_borrar': paciente_borrar

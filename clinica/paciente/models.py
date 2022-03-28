@@ -175,7 +175,7 @@ class Contacto(models.Model):
     )
 
     def __str__(self):
-        return self.nombre_contacto+ " " + self.apellido_contacto
+        return str(self.id_contacto)+'-'+self.nombre_contacto+ " " + self.apellido_contacto
 
     class Meta:
         db_table = 'contacto'
